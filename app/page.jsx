@@ -1,56 +1,38 @@
 import Image from "next/image";
 
+const opcionesDeMenu = [
+  { 
+    id: 1, texto: 'Acerca De', link: '#about', isSelected: false
+  }, { 
+    id: 2, texto: 'Tecnologías', link: '#technologies', isSelected: true
+  }, { 
+    id: 3, texto: 'Contacto', link: '#contact', isSelected: false
+  }
+];
+
+const menu = function () {
+  return (
+    <nav>
+      <h1 className="text-4xl font-extrabold mb-4">Menu</h1>
+      {opcionesDeMenu.map((opcion) => (
+        <a
+          key={opcion.id}
+          href={opcion.link}
+          className="p-4 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            {opcion.texto}
+          </a>
+      ))}
+    </nav>
+  );
+};
+
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      
-      <nav className="row-start-1 flex items-center justify-between w-full max-w-[800px]">
-        <a 
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-           
-          <Image
-            className="dark:invert"
-            src="/vercel.svg"
-            alt="Vercel logomark"
-            width={100}
-            height={24}
-            priority
-          />  
-          Code
-        </a> 
-        <a 
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-           
-          <Image
-            className="dark:invert"
-            src="/vercel.svg"
-            alt="Vercel logomark"
-            width={100}
-            height={24}
-            priority
-          />  
-          Issues
-        </a> 
-        <a 
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app">
-           
-          <Image
-            className="dark:invert"
-            src="/vercel.svg"
-            alt="Vercel logomark"
-            width={100}
-            height={24}
-            priority
-          />  
-          Pull Request
-        </a> 
-       
-      </nav>
-
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        {menu()}
+
         <Image
           className="dark:invert"
           src="/next.svg"
@@ -68,7 +50,7 @@ export default function Home() {
             .
           </li>
           <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
+            Save and see your changes instantly; then deploy to production
           </li>
         </ol>
 
