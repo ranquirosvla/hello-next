@@ -1,16 +1,24 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import Navigation from "./components/Navigation"; // Import Navigation
+
 
 const opcionesDeMenu = [
   { 
-    id: 1, texto: 'Acerca De', link: '#about', isSelected: false
+    id: 1, texto: 'Acerca De', link: 'about', isSelected: false
   }, { 
-    id: 2, texto: 'Tecnologías', link: '#technologies', isSelected: true
+    id: 2, texto: 'Tecnologías', link: 'experience', isSelected: true
   }, { 
-    id: 3, texto: 'Contacto', link: '#contact', isSelected: false
+    id: 3, texto: 'Contacto', link: 'contact', isSelected: false
   }
 ];
 
 const menu = function () {
+
+
+
   return (
     <nav>
       <h1 className="text-4xl font-extrabold mb-4">Menu</h1>
