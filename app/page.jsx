@@ -3,34 +3,54 @@
 import Image from "next/image";
 import { useState } from "react";
 import Navigation from "./components/Navigation"; // Import Navigation
-
+import Content from "./components/Content";
+import Contador from "./components/Contador";
 
 const opcionesDeMenu = [
   { 
-    id: 1, texto: 'Acerca De', link: 'about', isSelected: false
+    id: 1, texto: 'Acerca De', link: '#about', isSelected: false
   }, { 
-    id: 2, texto: 'Tecnologías', link: 'experience', isSelected: true
+    id: 2, texto: 'Experiencia', link: '#experience', isSelected: true
   }, { 
-    id: 3, texto: 'Contacto', link: 'contact', isSelected: false
+    id: 3, texto: 'Contacto', link: '#contact', isSelected: false
   }
 ];
 
 const menu = function () {
+  const [elementoActivo, setElementoActivo] = useState(1);
+  const [contador, setContador] = useState(50);
 
-
+  const handleIncrement = (newValue) => {
+    setContador(newValue); // Update the parent state when the event is emitted
+  };
 
   return (
     <nav>
-      <h1 className="text-4xl font-extrabold mb-4">Menu</h1>
       {opcionesDeMenu.map((opcion) => (
         <a
           key={opcion.id}
           href={opcion.link}
           className="p-4 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+          onClick={() => {
+            setElementoActivo(opcion.id);
+          }}
           >
+            {elementoActivo === opcion.id &&
+             (<span>→</span>)}
             {opcion.texto}
           </a>
+
       ))}
+
+      <Content elementoActivoHijo={elementoActivo} />
+
+        <button 
+          className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={() => setContador(contador + 1)}
+        >
+          Click Me {contador}
+        </button>
+      <Contador initialValue={contador} onIncrement={handleIncrement} />
     </nav>
   );
 };
@@ -38,6 +58,7 @@ const menu = function () {
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <Navigation name="Jose" />
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         {menu()}
 
